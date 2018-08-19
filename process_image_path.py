@@ -68,14 +68,14 @@ def Resize_Image(str_place,prefixion,new_w,new_h):
 #=======Batch expansion files===================
 sample: Expansion_Image(r"C:\Users\Administrator\Desktop\image","img",40,40)
 """
-def Expansion_Image(str_place,prefixion,new_w,new_h):
+def Expansion_Image(str_place,color,new_w,new_h):
     print str_place
     cnt=0
     for dirpath, dirnames, filenames in os.walk(str_place):
         for filename in filenames:
             im = Image.open(os.path.join(str_place,filename))
             im = im.convert('RGB')
-            n_im= Image.new("RGB", (new_w, new_h),"grey")
+            n_im= Image.new("RGB", (new_w, new_h),color)
             n_im.paste(im, ((new_w-im.size[0])/2, (new_h-im.size[1])/2, 
                             (new_w-im.size[0])/2+im.size[0], (new_h-im.size[1])/2+im.size[1]))
             
@@ -89,7 +89,8 @@ if __name__ == '__main__':
     
     #Rename_Image(r"C:\Users\Administrator\Desktop\image","img")
     #Resize_Image(r"C:\Users\Administrator\Desktop\image","img",32,32)
-    Expansion_Image(r"C:\Users\Administrator\Desktop\image","img",40,40)
+    #Expansion_Image(r"C:\Users\Administrator\Desktop\image",40,40)
+    Expansion_Image(r"F:\datasets\kaggle mnist\train_split","black",32,32)
 
 
 
