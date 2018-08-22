@@ -125,8 +125,8 @@ if __name__ == '__main__':
     #Expansion_Image(r"C:\Users\Administrator\Desktop\image",40,40)
     #Expansion_Image(r"F:\datasets\kaggle mnist\train_split","black",32,32)
    
-    #Expansion_Image(r"F:\datasets\tianchi_Zero_samples\DatasetA_train_20180813\train","gray",72,72)
+    Expansion_Image(r"F:\datasets\tianchi_Zero_samples\DatasetA_train_20180813\train","gray",84,84)
 
 
-    Resize_Image_short_side(r"I:\datasets\ImageNet_0820\ILSVRC2012_img_val","img",256)
+    #Resize_Image_short_side(r"I:\datasets\ImageNet_0820\ILSVRC2012_img_val","img",256)
 
