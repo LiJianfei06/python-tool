@@ -47,6 +47,15 @@ def Convolution(network,name="conv1",bottom_name='',top_name='',num_output=16,bi
     network=network+'  bottom: "%s"'%bottom_name+'\n'
     network=network+'  top: "%s"'%top_name+'\n'
     
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 1'+'\n'
+    network=network+'    decay_mult: 1'+'\n'
+    network=network+'  }'+'\n'
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 2'+'\n'
+    network=network+'    decay_mult: 0'+'\n'
+    network=network+'  }'+'\n'       
+    
     network=network+'  convolution_param {'+'\n'
     network=network+'    num_output: %s'%str(num_output)+'\n'
     network=network+'    bias_term: %s'%str(bias_term)+'\n'
@@ -61,6 +70,7 @@ def Convolution(network,name="conv1",bottom_name='',top_name='',num_output=16,bi
     if bias_term==True:
         network=network+'    bias_filler {'+'\n'  
         network=network+'      type: "%s"'%str(bias_type)+'\n'
+        network=network+'      value: 0'+'\n'
         network=network+'    }'+'\n'      
     network=network+'  }'+'\n'
     network=network+'}'+'\n'
@@ -126,6 +136,19 @@ def BatchNorm(network,name_bn="bn1",name_scale="scale1",bottom_name='',top_name=
     network=network+'  bottom: "%s"'%bottom_name+'\n'
     network=network+'  top: "%s"'%top_name+'\n'
     
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 0'+'\n'
+    network=network+'    decay_mult: 0'+'\n'
+    network=network+'  }'+'\n'
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 0'+'\n'
+    network=network+'    decay_mult: 0'+'\n'
+    network=network+'  }'+'\n'
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 0'+'\n'
+    network=network+'    decay_mult: 0'+'\n'
+    network=network+'  }'+'\n'      
+    
     network=network+'  batch_norm_param {'+'\n'
     network=network+'    use_global_stats: %s'%str(use_global_stats)+'\n'
     network=network+'  }'+'\n'
@@ -187,6 +210,15 @@ def InnerProduct(network,name="fc1",bottom_name='',top_name='',num_output=10,
     network=network+'  type: "InnerProduct"'+'\n'
     network=network+'  bottom: "%s"'%bottom_name+'\n'
     network=network+'  top: "%s"'%top_name+'\n'
+
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 1'+'\n'
+    network=network+'    decay_mult: 1'+'\n'
+    network=network+'  }'+'\n'
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 2'+'\n'
+    network=network+'    decay_mult: 1'+'\n'
+    network=network+'  }'+'\n' 
     
     network=network+'  inner_product_param {'+'\n'
     network=network+'    num_output: %s'%str(num_output)+'\n'
@@ -195,6 +227,8 @@ def InnerProduct(network,name="fc1",bottom_name='',top_name='',num_output=10,
     network=network+'    }'+'\n'
     network=network+'    bias_filler {'+'\n'  
     network=network+'      type: "%s"'%str(bias_type)+'\n'
+    network=network+'      value: 0'+'\n'
+    
     network=network+'    }'+'\n'
     network=network+'  }'+'\n'
     network=network+'}'+'\n'

@@ -34,6 +34,7 @@ def extract_train_image_mnist(filename,save_path,prefixion):
             
             pil_im2 = Image.fromarray((data))
             im = pil_im2.convert('RGB')
+            im = im.convert('L')
             #pil_im2.show()
             im.save(os.path.join(save_path,"%s_"%(label)+prefixion+"_%05d.jpg"%(cnt-2)))
             #sys.exit()
@@ -59,6 +60,7 @@ def extract_test_image_mnist(filename,save_path,prefixion):
             #print data.shape
             pil_im2 = Image.fromarray((data))
             im = pil_im2.convert('RGB')
+            im = im.convert('L')
             #pil_im2.show()
             im.save(os.path.join(save_path,prefixion+"_%05d.jpg"%(cnt-2)))
             #sys.exit()
@@ -74,6 +76,6 @@ if __name__ == '__main__':
 #    save_path=r"F:\datasets\kaggle mnist\train"
 #    extract_train_image_mnist(filename,save_path,"train_img")    
     
-   # filename=r"F:\datasets\kaggle mnist\test.csv"
-   # save_path=r"F:\datasets\kaggle mnist\test"
-   # extract_test_image_mnist(filename,save_path,"test_img")
+    filename=r"F:\datasets\kaggle mnist\test.csv"
+    save_path=r"F:\datasets\kaggle mnist\test"
+    extract_test_image_mnist(filename,save_path,"test_img")

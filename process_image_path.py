@@ -47,7 +47,7 @@ def Rename_Image(str_place,prefixion):
 #=======Batch resize images===================
 sample: Resize_Image(r"C:\Users\Administrator\Desktop\image","img",256,256)
 """
-def Resize_Image(str_place,prefixion,new_w,new_h):
+def Resize_Image(str_place,new_w,new_h):
     print str_place
     cnt=0
     for dirpath, dirnames, filenames in os.walk(str_place):
@@ -65,11 +65,12 @@ def Resize_Image(str_place,prefixion,new_w,new_h):
 #=======Batch resize images according to short_side===================
 sample: Resize_Image(r"C:\Users\Administrator\Desktop\image","img",256)
 """
-def Resize_Image_short_side(str_place,prefixion,new_wh):
+def Resize_Image_short_side(str_place,new_wh):
     print str_place
     cnt=0
     for dirpath, dirnames, filenames in os.walk(str_place):
         for filename in filenames:
+            #print filename
             im = Image.open(os.path.join(str_place,filename))
             im = im.convert('RGB')
             
@@ -118,15 +119,35 @@ def Expansion_Image(str_place,color,new_w,new_h):
                 sys.stdout.write("\r process %d files"%cnt)
                 sys.stdout.flush()                
                 
+                
+def deal_two_level(path):    
+    cnt=0
+    for dirpath, dirnames, filenames in os.walk(path):
+        print cnt,dirpath
+        cnt+=1
+        if cnt==1:
+            continue
+        Resize_Image_short_side(dirpath,256)
+     
+                
+                
 if __name__ == '__main__':
     
     #Rename_Image(r"C:\Users\Administrator\Desktop\image","img")
-    #Resize_Image(r"C:\Users\Administrator\Desktop\image","img",32,32)
+    #Resize_Image(r"C:\Users\Administrator\Desktop\image",32,32)
     #Expansion_Image(r"C:\Users\Administrator\Desktop\image",40,40)
-    #Expansion_Image(r"F:\datasets\kaggle mnist\train_split","black",32,32)
+    Expansion_Image(r"F:\datasets\kaggle mnist\train","black",32,32)
+    #Expansion_Image(r"F:\datasets\kaggle mnist\test","black",32,32)
    
-    Expansion_Image(r"F:\datasets\tianchi_Zero_samples\DatasetA_train_20180813\train","gray",84,84)
+    #Expansion_Image(r"F:\datasets\tianchi_Zero_samples\DatasetA_train_20180813\train","gray",84,84)
+    #Resize_Image(r"F:\datasets\tianchi_Zero_samples\DatasetA_train_20180813\train",84,84)
 
+    #Resize_Image_short_side(r"I:\datasets\ImageNet_0820\ILSVRC2012_img_val",256)
 
-    #Resize_Image_short_side(r"I:\datasets\ImageNet_0820\ILSVRC2012_img_val","img",256)
+    #deal_two_level(r"I:\datasets\ImageNet_0820\ILSVRC2012_img_train")
 
+        
+
+    
+    
+    
