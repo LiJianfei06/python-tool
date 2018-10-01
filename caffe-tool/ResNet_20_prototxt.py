@@ -61,7 +61,7 @@ def ResBlock(network,last_name='',block_name='conv2_',block_n=3,num_out=16,downs
 
 
 
-def Net( mode='train',root_path='',batch_size=32):
+def ResNet_cifar( mode='train',root_path='',batch_size=32,block_n=3):
 
 
     network='name:"ResNet-20"'+'\n'
@@ -84,10 +84,10 @@ def Net( mode='train',root_path='',batch_size=32):
     
     #network=Pooling(network,name="Pooling1",bottom_name='conv1',top_name='Pooling1',pool='MAX')
     
-    network,last_name=ResBlock(network,last_name=last_name,block_name='conv2_',block_n=3,num_out=16,downsampling=False,use_global_stats=use_global_stats)
-    network,last_name=ResBlock(network,last_name=last_name,block_name='conv3_',block_n=3,num_out=32,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
-    network,last_name=ResBlock(network,last_name=last_name,block_name='conv4_',block_n=3,num_out=64,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
-    #network,last_name=ResBlock(network,last_name=last_name,block_name='conv5_',block_n=3,num_out=64,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
+    network,last_name=ResBlock(network,last_name=last_name,block_name='conv2_',block_n=block_n,num_out=16,downsampling=False,use_global_stats=use_global_stats)
+    network,last_name=ResBlock(network,last_name=last_name,block_name='conv3_',block_n=block_n,num_out=32,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
+    network,last_name=ResBlock(network,last_name=last_name,block_name='conv4_',block_n=block_n,num_out=64,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
+    #network,last_name=ResBlock(network,last_name=last_name,block_name='conv5_',block_n=block_n,num_out=64,downsampling=True,down_method='conv',use_global_stats=use_global_stats)
     
     network,last_name=write_prototxt.Pooling(network,name="Pooling1",bottom_name=last_name,top_name='Pooling1',pool='AVE',global_pooling=True)
    
@@ -115,8 +115,8 @@ if __name__ == '__main__':
     
 
      
-    with open("train_ResNet_20.prototxt", 'w') as f:
-        f.write(str(Net(mode='train',root_path=root_path_train,batch_size=128)))#创建 train.prototxt
-    with open("test_ResNet_20.prototxt", 'w') as f:
-        f.write(str(Net(mode='test',root_path=root_path_test,batch_size=10)))#创建 train.prototxt
+    with open("train_ResNet_110.prototxt", 'w') as f:
+        f.write(str(ResNet_cifar(mode='train',root_path=root_path_train,batch_size=128,block_n=18)))#创建 train.prototxt
+    with open("test_ResNet_110.prototxt", 'w') as f:
+        f.write(str(ResNet_cifar(mode='test',root_path=root_path_test,batch_size=10,block_n=18)))#创建 train.prototxt
  
