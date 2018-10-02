@@ -87,6 +87,15 @@ def ConvolutionDepthwise(network,name="conv1",bottom_name='',top_name='',num_out
     network=network+'  bottom: "%s"'%bottom_name+'\n'
     network=network+'  top: "%s"'%top_name+'\n'
     
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 1'+'\n'
+    network=network+'    decay_mult: 1'+'\n'
+    network=network+'  }'+'\n'
+    network=network+'  param {'+'\n'
+    network=network+'    lr_mult: 2'+'\n'
+    network=network+'    decay_mult: 0'+'\n'
+    network=network+'  }'+'\n'     
+    
     network=network+'  convolution_param {'+'\n'
     network=network+'    num_output: %s'%str(num_output)+'\n'
     network=network+'    bias_term: %s'%str(bias_term)+'\n'
@@ -96,10 +105,13 @@ def ConvolutionDepthwise(network,name="conv1",bottom_name='',top_name='',num_out
     network=network+'    weight_filler {'+'\n'  
     network=network+'      type: "%s"'%str(weight_type)+'\n'
     network=network+'    }'+'\n'
+    
     if bias_term==True:
         network=network+'    bias_filler {'+'\n'  
         network=network+'      type: "%s"'%str(bias_type)+'\n'
-        network=network+'    }'+'\n'  
+        network=network+'      value: 0'+'\n'
+        network=network+'    }'+'\n'      
+
     
     network=network+'  }'+'\n'
     network=network+'}'+'\n'
@@ -270,6 +282,25 @@ def Concat(network,name="Concat1",bottom_name1='',bottom_name2='',top_name=''):
     return network,top_name
 
 
+''' Dropout层 '''
+def Dropout(network,name="Dropout1",bottom_name1='',top_name='',dropout_ratio=1.0):
+    network=network+'layer {'+'\n'
+    network=network+'  name: "%s"\n'%name
+    network=network+'  type: "Dropout"'+'\n'
+    network=network+'  bottom: "%s"'%bottom_name1+'\n'
+    network=network+'  top: "%s"'%top_name+'\n' 
+    network=network+'  dropout_param {'+'\n'
+    network=network+'    dropout_ratio: %s'%str(dropout_ratio)+'\n'
+    network=network+'  }'+'\n'       
+    network=network+'}'+'\n'
+
+      
+    return network,top_name
+
+
+
+
+  
 ''' SoftmaxWithLoss层 '''
 def SoftmaxWithLoss(network,name="Softmax1",bottom_name1='',bottom_name2='',top_name=''):
     network=network+'layer {'+'\n'
