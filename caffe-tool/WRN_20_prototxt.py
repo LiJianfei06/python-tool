@@ -69,7 +69,7 @@ def ResBlock(network,last_name='',block_name='conv2_',block_n=3,num_out=16,downs
 def WRN_cifar( mode='train',root_path='',batch_size=32,block_n=3,block_k=1):
 
 
-    network='name:"WRN-20"'+'\n'
+    network='name:"WRN-28"'+'\n'
     
     if mode=='train':
         network,last_name=write_prototxt.data(network,name="Data1",mirror=True,scale=0.00390625,crop_size=32,batch_size=batch_size,backend="LMDB",shuffle=True,datasets_path=root_path)
@@ -122,8 +122,8 @@ if __name__ == '__main__':
     
 
      
-    with open("train_WRN_20.prototxt", 'w') as f:
-        f.write(str(WRN_cifar(mode='train',root_path=root_path_train,batch_size=128,block_n=3,block_k=8)))#创建 train.prototxt
-    with open("test_WRN_20.prototxt", 'w') as f:
-        f.write(str(WRN_cifar(mode='test',root_path=root_path_test,batch_size=10,block_n=3,block_k=8)))#创建 train.prototxt
+    with open("train_WRN_28.prototxt", 'w') as f:
+        f.write(str(WRN_cifar(mode='train',root_path=root_path_train,batch_size=128,block_n=4,block_k=10)))#创建 train.prototxt
+    with open("test_WRN_28.prototxt", 'w') as f:
+        f.write(str(WRN_cifar(mode='test',root_path=root_path_test,batch_size=10,block_n=4,block_k=10)))#创建 train.prototxt
  
