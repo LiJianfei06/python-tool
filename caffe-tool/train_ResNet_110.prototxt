@@ -7657,6 +7657,7 @@ layer {
   top: "Pooling1"
   pooling_param {
     pool: AVE
+    engine: CAFFE
     global_pooling: True
   }
 }

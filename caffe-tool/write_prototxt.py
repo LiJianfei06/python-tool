@@ -195,6 +195,21 @@ def ReLU(network,name="ReLU1",bottom_name='',top_name=''):
     return network,top_name
 
 
+''' Sigmoid层 '''
+def Sigmoid(network,name="Sigmoid1",bottom_name='',top_name=''):
+    network=network+'layer {'+'\n'
+    network=network+'  name: "%s"\n'%name
+    network=network+'  type: "Sigmoid"'+'\n'
+    network=network+'  bottom: "%s"'%bottom_name+'\n'
+    network=network+'  top: "%s"'%top_name+'\n' 
+
+    network=network+'}'+'\n'
+
+      
+    return network,top_name
+
+
+
 ''' Pooling层 '''
 def Pooling(network,name="Pooling1",bottom_name='',top_name='',pool='MAX',kernel_size=2,stride=2,global_pooling=False):
     network=network+'layer {'+'\n'
@@ -207,6 +222,7 @@ def Pooling(network,name="Pooling1",bottom_name='',top_name='',pool='MAX',kernel
     network=network+'    pool: %s'%str(pool)+'\n'
     if(global_pooling==False):network=network+'    kernel_size: %s'%str(kernel_size)+'\n'
     if(global_pooling==False):network=network+'    stride: %s'%str(stride)+'\n'
+    if(global_pooling==True):network=network+'    engine: CAFFE'+'\n' 
     if(global_pooling==True):network=network+'    global_pooling: %s'%str(global_pooling)+'\n' 
     network=network+'  }'+'\n'
     network=network+'}'+'\n'
@@ -280,6 +296,29 @@ def Concat(network,name="Concat1",bottom_name1='',bottom_name2='',top_name=''):
 
       
     return network,top_name
+
+
+
+
+''' Axpy层(SE-Net) '''
+def Axpy(network,name="Concat1",bottom_name1='',bottom_name2='',bottom_name3='',top_name=''):
+    network=network+'layer {'+'\n'
+    network=network+'  name: "%s"\n'%name
+    network=network+'  type: "Axpy"'+'\n'
+    if(bottom_name1!=''):network=network+'  bottom: "%s"'%bottom_name1+'\n'
+    if(bottom_name2!=''):network=network+'  bottom: "%s"'%bottom_name2+'\n' 
+    if(bottom_name3!=''):network=network+'  bottom: "%s"'%bottom_name3+'\n' 
+    network=network+'  top: "%s"'%top_name+'\n' 
+    network=network+'}'+'\n'
+
+      
+    return network,top_name
+
+
+
+
+
+
 
 
 ''' Dropout层 '''
