@@ -217,13 +217,13 @@ def Net( mode='train',root_path='',batch_size=32):
     network,last_name=write_prototxt.Pooling(network,name="Pooling1",bottom_name=last_name,top_name='Pooling1',pool='AVE',global_pooling=True)
 
 
-    network,last_name=write_prototxt.InnerProduct(network,name="fc1",bottom_name=last_name,top_name='fc1',num_output=2,weight_type='xavier',bias_type='constant')
-    if mode=='train':
-        network,last_name=write_prototxt.SoftmaxWithLoss(network,name="Softmax1",bottom_name1='fc1',bottom_name2='label',top_name='Softmax1')
+    network,last_name=write_prototxt.InnerProduct(network,name="fc1",bottom_name=last_name,top_name='fc1',num_output=2,weight_type='msra',bias_type='constant')
+    #if mode=='train':
+    network,last_name=write_prototxt.SoftmaxWithLoss(network,name="Softmax1",bottom_name1='fc1',bottom_name2='label',top_name='Softmax1')
     if mode=='test':
         network,last_name=write_prototxt.Accuracy(network,name="prob",bottom_name1='fc1',bottom_name2='label',top_name='prob')
-    if mode=='deploy':
-        network,last_name=write_prototxt.Softmax(network,name="prob",bottom_name='fc1',top_name='prob')
+    #if mode=='deploy':
+        #network,last_name=write_prototxt.Softmax(network,name="prob",bottom_name='fc1',top_name='prob')
 
 #    print network
     

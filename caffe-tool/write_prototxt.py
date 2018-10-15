@@ -51,10 +51,11 @@ def Convolution(network,name="conv1",bottom_name='',top_name='',num_output=16,bi
     network=network+'    lr_mult: 1'+'\n'
     network=network+'    decay_mult: 1'+'\n'
     network=network+'  }'+'\n'
-    network=network+'  param {'+'\n'
-    network=network+'    lr_mult: 2'+'\n'
-    network=network+'    decay_mult: 0'+'\n'
-    network=network+'  }'+'\n'       
+    if bias_term==True:
+        network=network+'  param {'+'\n'
+        network=network+'    lr_mult: 2'+'\n'
+        network=network+'    decay_mult: 0'+'\n'
+        network=network+'  }'+'\n'       
     
     network=network+'  convolution_param {'+'\n'
     network=network+'    num_output: %s'%str(num_output)+'\n'
@@ -91,10 +92,11 @@ def ConvolutionDepthwise(network,name="conv1",bottom_name='',top_name='',num_out
     network=network+'    lr_mult: 1'+'\n'
     network=network+'    decay_mult: 1'+'\n'
     network=network+'  }'+'\n'
-    network=network+'  param {'+'\n'
-    network=network+'    lr_mult: 2'+'\n'
-    network=network+'    decay_mult: 0'+'\n'
-    network=network+'  }'+'\n'     
+    if bias_term==True:
+        network=network+'  param {'+'\n'
+        network=network+'    lr_mult: 2'+'\n'
+        network=network+'    decay_mult: 0'+'\n'
+        network=network+'  }'+'\n'     
     
     network=network+'  convolution_param {'+'\n'
     network=network+'    num_output: %s'%str(num_output)+'\n'
